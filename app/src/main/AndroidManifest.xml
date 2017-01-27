@@ -1,0 +1,84 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.stardust.quicksetting">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/screenshot_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme">
+
+        <service
+            android:name="com.stardust.quicksetting.screencapture.ScreenCaptureTileService"
+            android:icon="@drawable/screenshot_icon"
+            android:label="截图"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <service android:name="com.stardust.quicksetting.screencapture.MediaProjectionScreenCaptureService"/>
+
+        <activity
+            android:name="com.stardust.quicksetting.screencapture.ScreenCapturePermissionActivity"
+            android:icon="@drawable/screenshot_icon"
+            android:label="截图权限申请">
+
+        </activity>
+
+        <service
+            android:name="com.stardust.quicksetting.screenlock.LockScreenTileService"
+            android:icon="@drawable/lockscreen_icon"
+            android:label="锁屏"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.stardust.quicksetting.shutdown.ShutdownTileService"
+            android:icon="@drawable/shutdown"
+            android:label="关机"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.stardust.quicksetting.reboot.RebootTileService"
+            android:icon="@drawable/restart_icon"
+            android:label="重启"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".screenlock.ScreenLockReceiver"
+            android:description="@string/app_name"
+            android:label="锁屏"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/lock_screen"/>
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
