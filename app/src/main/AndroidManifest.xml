@@ -32,6 +32,11 @@
 
         </activity>
 
+        <activity
+            android:name=".storage.StoragePermissionActivity"
+            android:icon="@drawable/screenshot_icon"
+            android:label="存储权限申请"/>
+
         <service
             android:name="com.stardust.quicksetting.screenlock.LockScreenTileService"
             android:icon="@drawable/lockscreen_icon"
@@ -42,6 +47,8 @@
                     android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
         </service>
+
+        <activity android:name=".screenlock.ScreenLockAdminActivateActivity"/>
 
         <service
             android:name="com.stardust.quicksetting.shutdown.ShutdownTileService"

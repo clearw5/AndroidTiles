@@ -3,6 +3,7 @@ package com.stardust.quicksetting.screencapture;
 import android.content.Context;
 import android.content.Intent;
 
+import com.stardust.quicksetting.storage.Storage;
 import com.stardust.quicksetting.tool.Config;
 import com.stardust.quicksetting.tool.Shell;
 
@@ -22,9 +23,13 @@ import static com.stardust.quicksetting.tool.Config.DEFAULT_FOLDER;
 public abstract class ScreenCapture {
 
     public static void captureByConfigMethod(Context context) {
-        if (Config.method != null && Config.method.equals(Screencap.NAME)) {
+        if (Config.method.equals(Screencap.NAME)) {
+            Storage.checkStoragePermission(context);
             new Screencap(context).capture();
+        } else if (Config.method.equals(InputEvent120.NAME)) {
+            new InputEvent120(context).capture();
         } else {
+            Storage.checkStoragePermission(context);
             new MediaProjectionScreenCapture(context).capture();
         }
     }
@@ -108,5 +113,18 @@ public abstract class ScreenCapture {
         }
     }
 
+    public static class InputEvent120 extends ScreenCapture {
+
+        public static final String NAME = "input120";
+
+        public InputEvent120(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void capture(Context context, String path) {
+            Shell.execCommand("input keyevent 120", true);
+        }
+    }
 
 }

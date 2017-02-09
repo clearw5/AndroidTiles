@@ -18,10 +18,9 @@ public class ScreenLock {
     }
 
     public static void lockByDeviceManager(Context context) {
+        lockByDeviceManagerInner(context);
         if (!isScreenLockAdminActive(context)) {
             gotoDeviceManager(context);
-        } else {
-            lockByDeviceManagerInner(context);
         }
     }
 
@@ -37,11 +36,7 @@ public class ScreenLock {
     }
 
     private static void gotoDeviceManager(Context context) {
-        ComponentName componentName = new ComponentName(context, ScreenLockReceiver.class);
-        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
-        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "锁屏");
-        context.startActivity(intent);
+        context.startActivity(new Intent(context, ScreenLockAdminActivateActivity.class));
     }
 
 

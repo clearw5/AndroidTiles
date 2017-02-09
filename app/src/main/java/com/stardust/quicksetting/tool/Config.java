@@ -2,6 +2,8 @@ package com.stardust.quicksetting.tool;
 
 import android.os.Environment;
 
+import com.stardust.quicksetting.screencapture.ScreenCapture;
+
 import java.lang.reflect.Field;
 
 /**
@@ -12,8 +14,8 @@ public class Config {
 
     public static final String DEFAULT_FOLDER = Environment.getExternalStorageDirectory() + "/截图/";
     public static final String DEFAULT_CONFIG_PATH = DEFAULT_FOLDER + "config.txt";
-    public static final String DEFAULT_METHOD = "MediaProjection";
-    public static final String DEFAULT_DELAY = "998";
+    public static final String DEFAULT_METHOD = ScreenCapture.InputEvent120.NAME;
+    public static final String DEFAULT_DELAY = "500";
 
     public static String path = DEFAULT_FOLDER, method = DEFAULT_METHOD, delay = DEFAULT_DELAY;
 
